@@ -1,0 +1,25 @@
+services:
+  # Named "hub-app" (not "app") for the same reason Vault's service is "vault-app" — this
+  # container joins a network shared with Formation's own compose project, which already has a
+  # service plainly named "app"; Compose registers each service's DNS alias as its service name,
+  # so two same-named services on one shared network would collide.
+  hub-app:
+    build:
+      context: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - esports-tools-shared
+    expose:
+      - "3500"
+
+networks:
+  # Formation's Caddy container is what actually holds host ports 80/443 (see its own
+  # docker-compose.yml) — this app has no Caddy of its own. Both containers join this pre-created
+  # external network so Formation's Caddy can reach this one by service name ("hub-app", see the
+  # Caddyfile site block in the formation repo). Create it once on the host with:
+  #   docker network create esports-tools-shared
+  # (Already created for Vault — this just reuses the same network.)
+  esports-tools-shared:
+    external: true

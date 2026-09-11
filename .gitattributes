@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Executed directly in a Linux container via its shebang — CRLF here breaks the exec ("no such
+# file or directory") even though the file "looks" fine everywhere else.
+*.sh text eol=lf
