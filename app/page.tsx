@@ -5,7 +5,8 @@ import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, Lock, Bot, ArrowRight, Users, Receipt, Sparkles } from "lucide-react";
+import { ShieldCheck, Lock, Bot, ArrowRight, Users, Receipt } from "lucide-react";
+import { Logo } from "@/components/brand/logo";
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { signInAction } from "@/lib/actions/auth";
 import { FORMATION_URL, VAULT_URL, SITE_URL } from "@/lib/site-url";
@@ -35,9 +36,8 @@ export default async function HomePage() {
       />
       <header className="border-b">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2 text-lg font-semibold">
-            <Sparkles className="size-6 text-primary" />
-            Esports Tools
+          <div className="text-lg font-semibold">
+            <Logo />
           </div>
           <form action={signInAction}>
             <input type="hidden" name="redirectTo" value="/home" />
@@ -49,14 +49,21 @@ export default async function HomePage() {
       <main className="flex-1">
         {/* ---------- Hero ---------- */}
         <section className="relative overflow-hidden">
-          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          {/* A soft brand-colored glow plus a faint dot-grid, both static — no blurred rotating
+              blobs. Grounded, not generated. */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
             <div
-              className="fx-aurora absolute -left-24 -top-32 size-[34rem] rounded-full bg-[oklch(0.62_0.16_262)] opacity-[0.14] blur-3xl dark:opacity-[0.22]"
-              style={{ animationDuration: "22s" }}
+              className="absolute inset-x-0 top-0 h-[32rem]"
+              style={{ background: "radial-gradient(640px circle at 50% -10%, oklch(from var(--primary) l c h / 0.16), transparent 65%)" }}
             />
             <div
-              className="fx-aurora absolute -right-24 top-10 size-[30rem] rounded-full bg-[oklch(0.75_0.13_190)] opacity-[0.12] blur-3xl dark:opacity-[0.2]"
-              style={{ animationDuration: "26s", animationDelay: "-8s" }}
+              className="absolute inset-0 opacity-[0.05] dark:opacity-[0.08]"
+              style={{
+                backgroundImage: "radial-gradient(var(--foreground) 1px, transparent 1px)",
+                backgroundSize: "28px 28px",
+                maskImage: "radial-gradient(ellipse 60% 50% at 50% 0%, black, transparent 70%)",
+                WebkitMaskImage: "radial-gradient(ellipse 60% 50% at 50% 0%, black, transparent 70%)",
+              }}
             />
           </div>
 
@@ -96,8 +103,8 @@ export default async function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="flex flex-col">
               <CardContent className="flex flex-1 flex-col p-6">
-                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10">
-                  <ShieldCheck className="size-5.5 text-primary" />
+                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-chart-2/10">
+                  <ShieldCheck className="size-5.5 text-chart-2" />
                 </div>
                 <h3 className="text-lg font-semibold">Formation</h3>
                 <p className="mt-1.5 flex-1 text-sm text-muted-foreground">
@@ -115,8 +122,8 @@ export default async function HomePage() {
 
             <Card className="flex flex-col">
               <CardContent className="flex flex-1 flex-col p-6">
-                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10">
-                  <Lock className="size-5.5 text-primary" />
+                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-chart-3/10">
+                  <Lock className="size-5.5 text-chart-3" />
                 </div>
                 <h3 className="text-lg font-semibold">Vault</h3>
                 <p className="mt-1.5 flex-1 text-sm text-muted-foreground">

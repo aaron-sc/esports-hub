@@ -26,10 +26,10 @@ export default async function HomePage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <a href={FORMATION_URL} className="group block">
-            <Card className="h-full transition-colors group-hover:border-primary/40">
+            <Card className="h-full transition-colors group-hover:border-chart-2/40">
               <CardContent className="flex h-full flex-col p-6">
-                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10">
-                  <ShieldCheck className="size-5.5 text-primary" />
+                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-chart-2/10">
+                  <ShieldCheck className="size-5.5 text-chart-2" />
                 </div>
                 <h2 className="flex items-center gap-1.5 text-lg font-semibold">
                   Formation
@@ -43,10 +43,10 @@ export default async function HomePage() {
           </a>
 
           <a href={VAULT_URL} className="group block">
-            <Card className="h-full transition-colors group-hover:border-primary/40">
+            <Card className="h-full transition-colors group-hover:border-chart-3/40">
               <CardContent className="flex h-full flex-col p-6">
-                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-primary/10">
-                  <Lock className="size-5.5 text-primary" />
+                <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-chart-3/10">
+                  <Lock className="size-5.5 text-chart-3" />
                 </div>
                 <h2 className="flex items-center gap-1.5 text-lg font-semibold">
                   Vault

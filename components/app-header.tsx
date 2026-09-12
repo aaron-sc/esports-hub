@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Sparkles, LogOut, UserCog } from "lucide-react";
+import { LogOut, UserCog } from "lucide-react";
+import { Logo } from "@/components/brand/logo";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,10 +22,9 @@ export function AppHeader({ user }: { user: { name?: string | null; email?: stri
     .toUpperCase();
 
   return (
-    <header className="flex h-14 items-center justify-between border-b bg-background px-4 sm:px-6">
-      <Link href="/home" className="flex items-center gap-2 font-semibold">
-        <Sparkles className="size-5 text-primary" />
-        Esports Tools
+    <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b bg-background/70 px-4 backdrop-blur-md supports-backdrop-filter:bg-background/60 sm:px-6">
+      <Link href="/home" className="font-semibold">
+        <Logo size="size-5" />
       </Link>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
