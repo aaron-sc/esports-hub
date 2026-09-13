@@ -19,6 +19,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         pathname.startsWith("/privacy") ||
         pathname.startsWith("/terms") ||
         pathname.startsWith("/api/auth") ||
+        // This hub is also its own OIDC provider now (see lib/oauth/, app/oauth/) — these do their
+        // own session/credential checks internally rather than relying on this gate, the same
+        // reasoning Formation's identical auth.config.ts already documents for its own /oauth.
+        pathname.startsWith("/oauth") ||
+        pathname.startsWith("/.well-known") ||
         pathname === "/robots.txt" ||
         pathname === "/sitemap.xml";
       return isPublic || isLoggedIn;

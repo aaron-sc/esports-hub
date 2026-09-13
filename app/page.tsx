@@ -9,6 +9,7 @@ import { ShieldCheck, Lock, Bot, ArrowRight, Users, Receipt } from "lucide-react
 import { Logo } from "@/components/brand/logo";
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { signInAction } from "@/lib/actions/auth";
+import { safeRedirectTo } from "@/lib/utils/safe-redirect";
 import { FORMATION_URL, VAULT_URL, SITE_URL } from "@/lib/site-url";
 
 const ORG_JSON_LD = {
@@ -24,9 +25,18 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  // Populated when /oauth/authorize bounces an unauthenticated visitor here (see
+  // app/oauth/authorize/route.ts) mid-way through some other app's sign-in flow — resuming there
+  // once they sign in, instead of always landing on /home, is what makes that flow work at all.
+  searchParams: Promise<{ redirectTo?: string }>;
+}) {
   const session = await auth();
-  if (session?.user) redirect("/home");
+  const { redirectTo } = await searchParams;
+  const target = safeRedirectTo(redirectTo);
+  if (session?.user) redirect(target);
 
   return (
     <div className="flex flex-1 flex-col">
@@ -40,7 +50,7 @@ export default async function HomePage() {
             <Logo />
           </div>
           <form action={signInAction}>
-            <input type="hidden" name="redirectTo" value="/home" />
+            <input type="hidden" name="redirectTo" value={target} />
             <Button type="submit">Sign in</Button>
           </form>
         </div>
@@ -80,7 +90,7 @@ export default async function HomePage() {
             </p>
             <div className="fx-rise mt-8 flex flex-wrap justify-center gap-3" style={{ animationDelay: "240ms" }}>
               <form action={signInAction}>
-                <input type="hidden" name="redirectTo" value="/home" />
+                <input type="hidden" name="redirectTo" value={target} />
                 <Button type="submit" size="lg" className="group">
                   Sign in
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
