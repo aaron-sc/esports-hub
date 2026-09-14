@@ -21,14 +21,17 @@ function sweep() {
   }
 }
 
-/** Best-effort real client IP — trusts X-Forwarded-For since Caddy (the only reverse proxy in
- *  front of this app, see Caddyfile) sets it on every request. Falls back to a shared bucket
- *  key when absent (e.g. local dev with no proxy), which is a strictly more restrictive fallback,
- *  never a bypass. */
+/** Best-effort real client IP — deliberately does NOT trust X-Forwarded-For: Formation's Caddy
+ *  (the only reverse proxy in front of this app) appends to whatever XFF value a caller already
+ *  sent rather than overwriting it, so a request straight to the origin (bypassing Cloudflare)
+ *  can forge the first hop and get a fresh rate-limit bucket on every attempt. CF-Connecting-IP is
+ *  set by Cloudflare itself from the real TCP peer and can't be forwarded by a client. Falls back
+ *  to a shared bucket key when absent (e.g. local dev with no Cloudflare in front), which is a
+ *  strictly more restrictive fallback, never a bypass. */
 async function getClientIp(): Promise<string> {
   const h = await headers();
-  const forwardedFor = h.get("x-forwarded-for");
-  if (forwardedFor) return forwardedFor.split(",")[0].trim();
+  const cfConnectingIp = h.get("cf-connecting-ip");
+  if (cfConnectingIp) return cfConnectingIp.trim();
   return "unknown";
 }
 

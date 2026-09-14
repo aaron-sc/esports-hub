@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { ShieldCheck, Lock, Bot, ArrowRight, Users, Receipt } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
-import { signInAction } from "@/lib/actions/auth";
 import { safeRedirectTo } from "@/lib/utils/safe-redirect";
 import { FORMATION_URL, VAULT_URL, SITE_URL } from "@/lib/site-url";
 
@@ -49,10 +48,9 @@ export default async function HomePage({
           <div className="text-lg font-semibold">
             <Logo />
           </div>
-          <form action={signInAction}>
-            <input type="hidden" name="redirectTo" value={target} />
-            <Button type="submit">Sign in</Button>
-          </form>
+          <Button asChild>
+            <Link href={`/login?redirectTo=${encodeURIComponent(target)}`}>Sign in</Link>
+          </Button>
         </div>
       </header>
 
@@ -89,13 +87,12 @@ export default async function HomePage({
               one identity for your whole org across everything you run on esports-tools.com.
             </p>
             <div className="fx-rise mt-8 flex flex-wrap justify-center gap-3" style={{ animationDelay: "240ms" }}>
-              <form action={signInAction}>
-                <input type="hidden" name="redirectTo" value={target} />
-                <Button type="submit" size="lg" className="group">
+              <Button size="lg" className="group" asChild>
+                <Link href={`/login?redirectTo=${encodeURIComponent(target)}`}>
                   Sign in
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                </Button>
-              </form>
+                </Link>
+              </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link href={`${FORMATION_URL}/signup`}>New here? Request access</Link>
               </Button>

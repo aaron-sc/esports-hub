@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 
   const session = await auth();
   if (!session?.user) {
-    const signInUrl = new URL("/", SITE_URL);
+    const signInUrl = new URL("/login", SITE_URL);
     signInUrl.searchParams.set("redirectTo", request.nextUrl.pathname + request.nextUrl.search);
     return NextResponse.redirect(signInUrl);
   }
