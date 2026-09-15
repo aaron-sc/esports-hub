@@ -9,15 +9,20 @@ import { FORMATION_URL, VAULT_URL } from "@/lib/site-url";
  * show that card as unavailable (see app/admin/page.tsx).
  */
 
+export type WeeklyBucket = { weekStart: string; count: number };
+
 export type FormationStats = {
   counts: { organizations: number; users: number; teams: number };
   recentSignups: { name: string; email: string; createdAt: string }[];
   recentLogins: { name: string; createdAt: string }[];
+  signupsByWeek: WeeklyBucket[];
 };
 
 export type VaultStats = {
   counts: { organizations: number; users: number; sponsors: number; contracts: number; invoices: number };
   recentSignups: { name: string; email: string; createdAt: string }[];
+  signupsByWeek: WeeklyBucket[];
+  financials: { totalInvoicedCents: number; totalPaidCents: number; outstandingCents: number };
 };
 
 async function fetchStats<T>(url: string): Promise<T | null> {
