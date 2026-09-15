@@ -6,9 +6,8 @@ import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, Lock, Bot, ArrowRight, Users, Receipt } from "lucide-react";
+import { ShieldCheck, Lock, ArrowRight, Users, Receipt } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
-import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { safeRedirectTo } from "@/lib/utils/safe-redirect";
 import { FORMATION_URL, VAULT_URL, SITE_URL } from "@/lib/site-url";
 
@@ -157,19 +156,20 @@ export default async function HomePage({
             <Card className="flex flex-col border-dashed">
               <CardContent className="flex flex-1 flex-col p-6">
                 <div className="mb-4 flex items-center gap-2">
-                  <div className="flex size-11 items-center justify-center rounded-lg bg-muted">
-                    <Bot className="size-5.5 text-muted-foreground" />
-                  </div>
-                  <Badge variant="secondary">Coming soon</Badge>
+                  <img src="/atlas-mark.png" alt="" className="size-11 rounded-lg" />
+                  <Badge variant="secondary">SSO integration coming soon</Badge>
                 </div>
                 <h3 className="text-lg font-semibold">Atlas</h3>
                 <p className="mt-1.5 flex-1 text-sm text-muted-foreground">
                   AI-powered Valorant coaching — VOD breakdowns and practice plans built from your own team&apos;s
                   matches.
                 </p>
-                <div className="relative mt-5">
-                  <WaitlistForm product="Atlas" />
-                </div>
+                <Button variant="outline" className="mt-5 w-full" asChild>
+                  <a href="https://raiapp.party/" target="_blank" rel="noopener noreferrer">
+                    Explore Atlas
+                    <ArrowRight className="size-4" />
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           </div>

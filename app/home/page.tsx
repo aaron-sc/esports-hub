@@ -5,8 +5,7 @@ import { AppHeader } from "@/components/app-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, Lock, Bot, ArrowUpRight } from "lucide-react";
-import { WaitlistForm } from "@/components/marketing/waitlist-form";
+import { ShieldCheck, Lock, ArrowUpRight } from "lucide-react";
 import { FORMATION_URL, VAULT_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = { title: "Your apps" };
@@ -58,25 +57,23 @@ export default async function HomePage() {
           </a>
         </div>
 
-        <Card className="mt-4 border-dashed">
-          <CardContent className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-muted">
-                <Bot className="size-5.5 text-muted-foreground" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-semibold">Atlas</h2>
-                  <Badge variant="secondary">Coming soon</Badge>
+        <a href="https://raiapp.party/" target="_blank" rel="noopener noreferrer" className="group mt-4 block">
+          <Card className="border-dashed transition-colors group-hover:border-foreground/30">
+            <CardContent className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <img src="/atlas-mark.png" alt="" className="size-11 shrink-0 rounded-lg" />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-lg font-semibold">Atlas</h2>
+                    <Badge variant="secondary">SSO integration coming soon</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">AI-powered Valorant coaching.</p>
                 </div>
-                <p className="text-sm text-muted-foreground">AI-powered Valorant coaching.</p>
               </div>
-            </div>
-            <div className="relative sm:w-72">
-              <WaitlistForm product="Atlas" />
-            </div>
-          </CardContent>
-        </Card>
+              <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 sm:ml-4" />
+            </CardContent>
+          </Card>
+        </a>
 
         <div className="mt-10 border-t pt-6">
           <Button variant="link" className="h-auto p-0 text-muted-foreground" asChild>
