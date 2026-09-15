@@ -25,7 +25,7 @@ export default async function HomePage() {
         <p className="mb-8 text-muted-foreground">Pick where you&apos;re headed — you&apos;re signed in everywhere.</p>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <a href={FORMATION_URL} className="group block">
+          <a href={`${FORMATION_URL}/sso?redirectTo=${encodeURIComponent("/orgs")}`} className="group block">
             <Card className="h-full transition-colors group-hover:border-chart-2/40">
               <CardContent className="flex h-full flex-col p-6">
                 <div className="mb-4 flex size-11 items-center justify-center rounded-lg bg-chart-2/10">
