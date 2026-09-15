@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,13 @@ export default async function HomePage({
   // once they sign in, instead of always landing on /home, is what makes that flow work at all.
   searchParams: Promise<{ redirectTo?: string }>;
 }) {
+  // admin.esports-tools.com is the same app/container as the bare hostname (see Caddyfile in the
+  // Formation repo) — this just sends the bare subdomain straight to the dashboard instead of the
+  // marketing page. The actual gate (session + admin email) lives in app/admin/layout.tsx, not
+  // here — this redirect fires regardless of auth state.
+  const host = (await headers()).get("host") ?? "";
+  if (host.startsWith("admin.")) redirect("/admin");
+
   const session = await auth();
   const { redirectTo } = await searchParams;
   const target = safeRedirectTo(redirectTo);

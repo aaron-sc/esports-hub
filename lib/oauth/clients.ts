@@ -32,6 +32,12 @@ export function findClient(clientId: string): HubOAuthClient | null {
   return loadClients().find((c) => c.clientId === clientId) ?? null;
 }
 
+/** Every registered client's public info (id + name), for the admin console — never the secret
+ *  hash, which callers of this function have no need for. */
+export function listClients(): { clientId: string; name: string }[] {
+  return loadClients().map(({ clientId, name }) => ({ clientId, name }));
+}
+
 /** Every redirect_uri this client is allowed to send users back to — checked as an exact string
  *  match, never a prefix/pattern match, same reasoning as Formation's identical
  *  lib/oauth/clients.ts (a prefix match would let an attacker register a lookalike subdomain or
